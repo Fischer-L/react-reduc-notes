@@ -21,11 +21,18 @@
 
 ## React Component v.s. React Element v.s HTML Element
 
-* React Component is `React.Component`, which has `render` method to return one React element
+* React Component is `React.Component`, which has `render` method to return one React element.
 
-* React Element is a plain object carrying element type and data for rendering use
+* React Element is a plain object carrying element type and data for rendering use. 
 
-* The React `div` element represents the HTML `div` so rendering it will produce a real `<div>`
+  It is created from React Component with `props`.
+
+* The React `div` element is the object for the HTML `div`.
+  
+  Calling `ReactDOM.render` againt it so will produce an instance of React `div` component.
+  
+  Calling the `render` method on the instance of React `div` component will return a HTML `<div>`.
+  
 
 ```js
 class Hello extends React.Component {
