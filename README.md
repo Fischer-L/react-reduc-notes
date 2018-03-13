@@ -132,7 +132,7 @@ helloComponent2.props = HelloElem1.props;
   ```
   [2] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/scripts/start.js#L109
 
-* In the react-dev-utils's WebpackDevServerUtils.js, it does the `createCompiler` job to create a webpack compiler and listen to the webpack's events.
+* In the react-dev-utils's WebpackDevServerUtils.js, it does the `createCompiler` job to create a webpack compiler.
   ```js
   function createCompiler(webpack, config, appName, urls, useYarn) {
      // "Compiler" is a low-level interface to Webpack.
@@ -143,14 +143,6 @@ helloComponent2.props = HelloElem1.props;
      } catch (err) {
        // ... ...
      }
-     
-     compiler.plugin('invalid', () => {
-       // ... ...
-     });
-     
-     compiler.plugin('done', () => {
-       // ... ...
-     });
      
      // ... ...
   }
