@@ -94,4 +94,39 @@ helloComponent2.props = HelloElem1.props;
   ```
   [1] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/bin/react-scripts.js#L35
   
-*   
+* In the react-scripts's start.js, it creates a webpack compiler with the config path and the url params.
+  ```js
+    const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
+    const appName = require(paths.appPackageJson).name;
+    const urls = prepareUrls(protocol, HOST, port);
+    // Create a webpack compiler that is configured with custom messages.
+    const compiler = createCompiler(
+      webpack,
+      config, // This the react-scripts's webpack.config.dev.js
+      appName,
+      urls,
+      paths.useYarn
+    );
+  ```
+  [1] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/scripts/start.js#L94
+  
+  Then, creates the webpack dev server and the dev server will listens to incoming requests.
+  ```js
+     const serverConfig = createDevServerConfig(
+      proxyConfig,
+      urls.lanUrlForConfig
+    );
+    const devServer = new WebpackDevServer(compiler, serverConfig);
+    // Launch WebpackDevServer.
+    devServer.listen(port, HOST, err => {
+      if (err) {
+        return console.log(err);
+      }
+      if (isInteractive) {
+        clearConsole();
+      }
+      console.log(chalk.cyan('Starting the development server...\n'));
+      openBrowser(urls.localUrlForBrowser);
+    });
+  ```
+  [2] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/scripts/start.js#L109
