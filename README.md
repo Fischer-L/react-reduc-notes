@@ -155,3 +155,4 @@ helloComponent2.props = HelloElem1.props;
      // ... ...
   }
   ```
+  [1] https://github.com/facebook/create-react-app/blob/e9abde739240b3124ab7237cbf32a370c209511e/packages/react-dev-utils/WebpackDevServerUtils.js#L116
