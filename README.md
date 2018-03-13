@@ -96,6 +96,7 @@ helloComponent2.props = HelloElem1.props;
   
 * In the react-scripts's start.js, it creates a webpack compiler with the config path and the url params.
   ```js
+    const webpack = require('webpack');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
@@ -130,3 +131,27 @@ helloComponent2.props = HelloElem1.props;
     });
   ```
   [2] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/scripts/start.js#L109
+
+* In the react-dev-utils's WebpackDevServerUtils.js, it does the `createCompiler` job to create a webpack compiler and listen to the webpack's events.
+  ```js
+  function createCompiler(webpack, config, appName, urls, useYarn) {
+     // "Compiler" is a low-level interface to Webpack.
+     // It lets us listen to some events and provide our own custom messages.
+     let compiler;
+     try {
+       compiler = webpack(config, handleCompile);
+     } catch (err) {
+       // ... ...
+     }
+     
+     compiler.plugin('invalid', () => {
+       // ... ...
+     });
+     
+     compiler.plugin('done', () => {
+       // ... ...
+     });
+     
+     // ... ...
+  }
+  ```
