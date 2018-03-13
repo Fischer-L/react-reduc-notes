@@ -60,3 +60,38 @@ helloComponent2.props = HelloElem1.props;
 
 
 ## How `create-react-app` magically builds with the webpack and start the webpack dev server
+
+* In the package.json from running `npx create-react-app my-app`, we can know it go to `react-scripts` for helps.
+  ```js
+  {
+     "scripts": {
+       "start": "react-scripts start",
+       "build": "react-scripts build",
+       "test": "react-scripts test --env=jsdom",
+       "eject": "react-scripts eject"
+     }
+   }
+  ```
+  So when we run `yarn start`, nodejs would invoke the react-scripts.js with the arg of `start`
+  
+* In the react-scripts.js, it runs the "../scripts/start.js" sync.
+  ```js
+  // ... ...
+  const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
+  // ... ...
+  switch (script) {
+  case 'build':
+  case 'eject':
+  case 'start':
+  case 'test': {
+    const result = spawn.sync(
+      'node',
+      nodeArgs
+        .concat(require.resolve('../scripts/' + script))
+        .concat(args.slice(scriptIndex + 1)),
+      { stdio: 'inherit' }
+    );
+  ```
+  [1] https://github.com/facebook/create-react-app/blob/d9fbe448d729be7a96ffeedc77a9f4cd1b80213b/packages/react-scripts/bin/react-scripts.js#L35
+  
+*   
