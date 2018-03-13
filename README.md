@@ -57,3 +57,6 @@ let helloComponent1 = ReactDOM.render(
 let helloComponent2 = new HelloElem1.type();
 helloComponent2.props = HelloElem1.props;
 ```
+
+
+## How `create-react-app` magically builds with the webpack and start the webpack dev server
